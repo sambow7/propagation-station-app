@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <title>Comic Collection</title>
+</head>
+<header>
+  <h1>Comic Books</h1>
+  <a class="add-comic" href="/comics/new">log comic book</a>
+</header>
+
+<body>
+  <div class="index-header-div">
+    <h2>Comic Book Collection</h2>
+    <p>A list of your favorite comic books.</p>
+  </div>
+  <ul>
+    <% comics.forEach((comic) => { %>
+      <li>
+        <a class="comic-cards" href="/comics/<%=comic._id%>"><%= comic.publisher %></a>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+
+</html>
