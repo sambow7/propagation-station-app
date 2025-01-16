@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Community</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+        <h1>Welcome to My Community</h1>
+        <ul class="user-list">
+            <% users.forEach((user)=> { %>
+                <li>
+                    <a href="/users/<%= user._id %>" class="user-link">
+                        <%= user.username %>
+                    </a>
+                </li>
+                <% }) %>
+        </ul>
+</body>
+
+</html>

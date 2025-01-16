@@ -5,10 +5,10 @@ const User = require('../models/user.js');
 router.get('/', async (req, res) => {
   try {
     const users = await User.find({});
-    res.render('users/index.ejs', { users: users });
+    res.render('users/index', { users: users });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Error loading users")
+    res.status(500).send("Error loading users");
   }
 });
 
@@ -22,11 +22,12 @@ router.get('/:userId', async (req, res) => {
     const plants = user.cabinet;
     const username = user.username;
     const _id = req.session.user._id;
-    res.render('ussers/show.ejs', { user: { username, plants, _id} });
+    res.render('users/show.ejs', { user: { username, plants, _id } });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Error loading user");
+    res.redirect('/');
   }
 });
+
 
 module.exports = router;
