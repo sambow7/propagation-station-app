@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/user.js');
 
 // Index
-router.get('/', async (req, res) => {
+router.get('/:userId', async (req, res) => {
   try {
     const userId = req.session.user._id
     const user = await User.findById(userId).select('cabinet');

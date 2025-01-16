@@ -41,7 +41,6 @@ app.use(
 app.set('view engine', 'ejs');
 
 app.use(passUserToView);
-
 app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/users', usersController);
@@ -55,6 +54,10 @@ app.get('/', (req, res) => {
   }
   
 });
+
+//Routes
+
+
 
 app.listen(port, () => {
   console.log(`🎧 PORT: ${port}!`);
