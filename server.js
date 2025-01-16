@@ -1,5 +1,4 @@
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -9,6 +8,7 @@ const session = require('express-session');
 
 const authController = require('./controllers/auth.js');
 const plantsController = require('./controllers/plants.js');
+const usersController = require('./controllers/users.js');
 
 const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
@@ -22,7 +22,10 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(
@@ -33,13 +36,16 @@ app.use(
   })
 );
 
+
+app.set('view engine', 'ejs');
+
 app.use(passUserToView);
 
 app.get('/', (req, res) => {
   if (req.session.user) {
     res.redirect(`/users/${req.session.user._id}/plants`);
   } else {
-    res.redirect('/auth/sign-in');
+    res.redirect('index.ejs');
   }
   
 });
