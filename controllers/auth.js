@@ -1,9 +1,38 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/user.js');
+const User = require('../models/user');
 
 function signUp(req, res) {
   res.render('auth/sign-up.ejs');
 }
+
+async function signUpPost(req, res) {
+  try {
+    const { username, password, confirmPassword } = req.body;
+    if (!username || !password || !confirmPassword) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: 'Passwords do not match' });
+    }
+
+    const userInDatabase = await User.findOne({ username });
+    if (userInDatabase) {
+      return res.status(400).json({ message: 'Username already taken' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = { username, password: hashedPassword }
+    await User.create(newUser);
+    res.status(200).redirect('/');
+  } catch (error) {
+    console.error('Error during sign-up', error);
+    res.status(500).json({ message: 'Internal Server Error during sign-up' });
+  }
+}
+
+
+
 
 // router.get('/sign-in', (req, res) => {
 //   res.render('auth/sign-in.ejs');
