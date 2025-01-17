@@ -31,8 +31,11 @@ async function signUpPost(req, res) {
   }
 }
 
+function signIn(req, res) {
+  res.render('auth/sign-in.ejs');
+};
 
-
+async function signInPost(req, res) {
 
 // router.get('/sign-in', (req, res) => {
 //   res.render('auth/sign-in.ejs');
