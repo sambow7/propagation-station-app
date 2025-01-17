@@ -79,7 +79,10 @@ async function editPlant(req, res) {
     } else {
       res.status(404).render('404/notfound', { title: 'Plant Not Found' });
     }
-  
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 }
 
 // Index
