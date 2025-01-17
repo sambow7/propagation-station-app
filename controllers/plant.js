@@ -91,10 +91,10 @@ async function updatePlant(req, res) {
     const { id } = req.params;
 
     const updatedPlant = await Plant.findByIdAndUpdate(id, req.body)
-    if(updatedPlant) {
+    if (updatedPlant) {
       res.status(200).redirect(`/plants`);
     } else {
-      res.status(404).render('404/notfound', { title: 'Plant Not Found'});
+      res.status(404).render('404/notfound', { title: 'Plant Not Found' });
     }
   } catch (error) {
     console.error(error);
@@ -103,6 +103,19 @@ async function updatePlant(req, res) {
 }
 
 async function deletePlant(req, res) {
+  try {
+    const { id } = req.params;
+    const deletedPlant = await Plant.findByIdAndDelete(id);
+    if (deletedPlant) {
+      res.status(200).redirect('/plants');
+    } else {
+      res.status(404).render('404/notfound', { title: 'Plant Not Found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 // Index
 // router.get('/:userId', async (req, res) => {
