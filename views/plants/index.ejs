@@ -1,30 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheets/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<html>
 
-  <title>Comic Collection</title>
+<head>
+  <%- include('../partials/head') %>
+    <title>
+      <%= title %>
+    </title>
 </head>
-<header>
-  <h1>Comic Books</h1>
-  <a class="add-comic" href="/comics/new">log comic book</a>
-</header>
+
 
 <body>
-  <div class="index-header-div">
-    <h2>Comic Book Collection</h2>
-    <p>A list of your favorite comic books.</p>
+  <nav>
+    <div class="nav-wrapper teal">
+      <a href="/" class="brand-logo center">Library</a>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="center-align">plants List</h1>
+    <ul class="collection">
+      <% plants.forEach(plant=> { %>
+        <li class="collection-item">
+          <a href="/plants/<%= plant._id %>">
+            <strong>
+              <%= plant.title %>
+            </strong> by <%= plant.author %>
+          </a>
+          <div class="plant-container">
+            <span class="created-by">
+              Created by: <strong>
+                <%= plant.createdBy ? plant.createdBy.username : 'Unknown' %>
+              </strong>
+            </span>
+            <span class="created-by">
+              <%= plant.formattedDate ? plant.formattedDate : 'Date not available' %>
+            </span>
+          </div>
+          <% plant.comments.forEach(comment=> { %>
+            <p class="comment">
+              <% if (comment.createdBy) { %>
+                <%= comment.createdBy.username %>
+                  <% } %>
+                    <%= comment.content %>
+            </p>
+            <% }) %>
+              <form action="/plants/<%= plant._id %>/comments" method="POST">
+                <div class="row">
+                  <form class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <i class="material-icons prefix">comment</i>
+                        <textarea name="content" id="icon_prefix2" class="tiny materialize-textarea"></textarea>
+                        <input class="comment-input" type="submit" value="Comment">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </form>
+        </li>
+        <% }); %>
+    </ul>
+    <div class="center-align">
+      <a href="/plants/new" class="btn waves-effect waves-light teal">Add a New Plant</a>
+    </div>
   </div>
-  <ul>
-    <% comics.forEach((comic) => { %>
-      <li>
-        <a class="comic-cards" href="/comics/<%=comic._id%>"><%= comic.publisher %></a>
-      </li>
-    <% }) %>
-  </ul>
+
+
+
 </body>
 
 </html>

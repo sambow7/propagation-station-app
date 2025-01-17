@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/nav') %>
+
+    <div class="container" id="bottomMargin">
+      <h1 class="center-align">
+        <%= plant.title %>
+      </h1>
+      <form action="/plants/<%= plant.id %>?_method=PUT" method="POST" style="display: inline">
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="title" id="title" value="<%= plant.title %>" required>
+            <label for="title">Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="author" id="author" value="<%= plant.author %>" required>
+            <label for="author">Author</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="published" id="published" value="<%= plant.published %>" required>
+            <label for="published">Published</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="coverImage" id="coverImage" value="<%= plant.coverImage %>" required>
+            <label for="coverImage">Cover Image</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea name="description" id="description" class="materialize-textarea"
+              required><%= plant.description %></textarea>
+            <label for="description">Description</label>
+          </div>
+        </div>
+        <div class="row center-align">
+          <button type="submit" class="btn wave-effect waves-light teal">Update Plant</button>
+      </form>
+      <a href="/plants" class="btn waves-effect waves-light orange">Back</a>
+      <form action="/plants/<%= plant.id %>?_method=DELETE" method="POST" style="display: inline">
+        <button type="submit" class="btn red darken-1">Delete Plant</button>
+      </form>
+    </div>
+</body>
+
+</html>

@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -43,8 +43,9 @@ app.use(
   cookie: { secure: process.env.NODE_ENV === 'production' , httpOnly: true},
 }));
 
-
 app.set('view engine', 'ejs');
+app.set('views', './views');
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passUserToView);
 app.use('/auth', authController);
@@ -52,17 +53,18 @@ app.use(isSignedIn);
 app.use('/users', usersController);
 app.use('/users/:userId/plants', plantsController);
 
-app.get('/', (req, res) => {
-  if (req.session.user) {
-    res.redirect(`/users/${req.session.user._id}/plants`);
-  } else {
-    res.redirect('index.ejs');
-  }
-  
-});
 
-//Routes
+// Seed Route
+app.use('/', require('./routes/seed'));
 
+// Auth Route
+app.use('/', require('./routes/auth'));
+
+// Home Route
+app.use('/', require('./routes/home'));
+
+// Plant Route
+app.use('/', require('./routes/plant'));
 
 
 app.listen(port, () => {
