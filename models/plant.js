@@ -9,8 +9,8 @@ const commentSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 const plantSchema = new mongoose.Schema({
-  title: String,
-  author: String,
+  name: String,
+  description: String,
   comments: [commentSchema],
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true });

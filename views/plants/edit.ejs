@@ -15,13 +15,13 @@
 
     <div class="container" id="bottomMargin">
       <h1 class="center-align">
-        <%= plant.title %>
+        <%= plant.name %>
       </h1>
       <form action="/plants/<%= plant.id %>?_method=PUT" method="POST" style="display: inline">
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" name="title" id="title" value="<%= plant.title %>" required>
-            <label for="title">Title</label>
+            <input type="text" name="name" id="name" value="<%= plant.name %>" required>
+            <label for="name">Name</label>
           </div>
         </div>
         <div class="row">
