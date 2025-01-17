@@ -3,7 +3,7 @@ const moment = require('moment');
 
 async function index(req, res) {
   try {
-    if(!req.session.user) {
+    if (!req.session.user) {
       return res.redirect('/auth/sign-in');
     }
     const plants = await Plant.find({}).populate('createdBy', 'username').populate('comments.createdBy', 'username');
@@ -11,7 +11,7 @@ async function index(req, res) {
       ...plant.toObject(),
       formattedDate: moment(plant.createdAt).fromNow()
     }))
-    res.render('plants', { title: 'Plant List 1', plants: formattedPlant})
+    res.render('plants', { title: 'Plant List 1', plants: formattedPlant })
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -24,7 +24,7 @@ function newPlant(req, res) {
 
 async function postPlant(req, res) {
   try {
-    if(!req.session.user) {
+    if (!req.session.user) {
       return res.redirect('/auth/sign-in');
     }
     console.log(req.session.user);
@@ -60,7 +60,7 @@ async function addComment(req, res) {
 async function showPlant(req, res) {
   try {
     const plant = await Plant.findById(req.params.id);
-    if(plant) {
+    if (plant) {
       res.render('plants/show', { title: 'Plant Details', plant });
     } else {
       res.status(404).render('404/notfound', { title: 'Plant Not Found' });
@@ -74,7 +74,7 @@ async function showPlant(req, res) {
 async function editPlant(req, res) {
   try {
     const plant = await Plant.findById(req.params.id);
-    if(plant) {
+    if (plant) {
       res.render('plants/edit', { title: 'Edit Plant', plant });
     } else {
       res.status(404).render('404/notfound', { title: 'Plant Not Found' });
@@ -84,6 +84,25 @@ async function editPlant(req, res) {
     res.status(500).send('Internal Server Error');
   }
 }
+
+async function updatePlant(req, res) {
+  try {
+    const bookId = parseInt(req.params.id);
+    const { id } = req.params;
+
+    const updatedPlant = await Plant.findByIdAndUpdate(id, req.body)
+    if(updatedPlant) {
+      res.status(200).redirect(`/plants`);
+    } else {
+      res.status(404).render('404/notfound', { title: 'Plant Not Found'});
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
+async function deletePlant(req, res) {
 
 // Index
 // router.get('/:userId', async (req, res) => {
