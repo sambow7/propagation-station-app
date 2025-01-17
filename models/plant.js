@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
-const careSchema = new mongoose.Schema({
-  name: {type: String,required: true,},
-  care: {type: String,},
-  propagation: {type: Boolean,},
-  cabinet: [plantSchema],
-});
+const careComment = new mongoose.Schema({
+  content: String,
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
+}, { timestamps: true })
 
 const commentSchema = new mongoose.Schema({
   text: {
