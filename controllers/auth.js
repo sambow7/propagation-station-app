@@ -45,7 +45,23 @@ async function signInPost(req, res) {
     if (!userInDatabase) {
       return res.status(400).json({ message: 'Invalid username or password' });
     }
+    const validPassword = await bcrypt.compare(password, userInDatabase.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Invalid username or password' });
+    }
+
+    req.session.user = {
+      id: userInDatabase._id,
+      username: userInDatabase.username
+    }
+    res.status(200).redirect('/');
+  } catch (error) {
+    console.error('Error during sign-in', error);
+    res.status(500).json({ message: 'Internal Server Error during sign-in' });
   }
+};
+
+
 
 // router.get('/sign-in', (req, res) => {
 //   res.render('auth/sign-in.ejs');
