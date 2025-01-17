@@ -6,6 +6,15 @@ async function index(req, res) {
     if(!req.session.user) {
       return res.redirect('/auth/sign-in');
     }
+    const plants = await Plant.find({}).populate('createdBy', 'username').populate('comments.createdBy', 'username');
+    const formattedPlant = plants.map(plant => ({
+      ...plant.toObject(),
+      formattedDate: moment(plant.createdAt).fromNow()
+    }))
+    res.render('plants', { title: 'Plant List 1', plants: formattedPlant})
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
   }
 }
 
