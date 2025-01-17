@@ -9,8 +9,8 @@
 </head>
 
 <body>
+  <%- include('../partials/nav') %>
   <% if (user) { %>
-    <!-- Navigation Bar -->
     <nav class="teal">
       <div class="nav-wrapper">
         <a href="/" class="brand-logo center"> 🪴 Plants 🪴</a>
@@ -27,7 +27,6 @@
     </div>
     <% } else { %>
 
-      <!-- Welcome message for guests -->
       <div class="welcome-message">
         <h4>Welcome to the app, guest.</h4>
         <p>

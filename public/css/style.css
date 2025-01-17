@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to bottom, #e8f5e9, #a5d6a7); /* Light green gradient */
+  background: linear-gradient(to bottom, #000000, #005003); /* Green gradient */
   font-family: 'Roboto', sans-serif;
   padding-top: 30px;
 }
@@ -19,24 +19,24 @@ body {
 .form-container h1, 
 .form-container h4 {
   text-align: center;
-  color: #2e7d32; /* Deep green */
+  color: #2e7d32;
   font-weight: bold;
 }
 
 .form-container label {
-  color: #1b5e20; /* Darker green for text */
+  color: #1b5e20;
   font-weight: 600;
 }
 
 input {
-  border: 2px solid #66bb6a; /* Green border for inputs */
+  border: 2px solid #66bb6a;
   border-radius: 5px;
   padding: 8px;
   margin-bottom: 20px;
 }
 
 button {
-  background-color: #43a047; /* Button green */
+  background-color: #43a047;
   color: white;
   border: none;
   padding: 12px;
@@ -47,7 +47,7 @@ button {
 }
 
 button:hover {
-  background-color: #2e7d32; /* Darker green on hover */
+  background-color: #2e7d32; 
 }
 
 a.btn {
@@ -59,11 +59,11 @@ a.btn {
   text-align: center;
   margin-top: 20px;
   font-size: 0.9em;
-  color: #4caf50; /* Lighter green */
+  color: #4caf50; 
 }
 
 .error-message {
-  color: #d32f2f; /* Error red */
+  color: #d32f2f;
   text-align: center;
 }
 
@@ -82,7 +82,7 @@ a.btn {
 }
 
 nav {
-  background: linear-gradient(to right, #4caf50, #2e7d32); /* Subtle green gradient */
+  background: linear-gradient(to right, #4caf50, #2e7d32); 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 

@@ -50,7 +50,7 @@ async function addComment(req, res) {
     }
     plant.comments.push(newComment);
     await plant.save();
-    res.status(500).redirect('plansts')
+    res.status(200).redirect(`/plants/${req.params.id}`);
   } catch (error) {
     console.error('Error adding new commment', error);
     res.status(500).send('Internal Server Error');
