@@ -36,6 +36,12 @@ function signIn(req, res) {
 };
 
 async function signInPost(req, res) {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+  }
 
 // router.get('/sign-in', (req, res) => {
 //   res.render('auth/sign-in.ejs');
