@@ -18,8 +18,13 @@ async function index(req, res) {
   }
 }
 
+function newPlant(req, res) {
+  res.render('plants/new', { title: 'New Plant' });
+}
 
-
+async function postPlant(req, res) {
+  try {}
+}
 
 // Index
 // router.get('/:userId', async (req, res) => {
@@ -46,18 +51,18 @@ async function index(req, res) {
 // });
 
 // Create
-router.post('/', async (req, res) => {
-  try {
-    const userId = req.session.user._id;
-    const user = await User.findById(userId);
-    user.cabinet.push(req.body);
-    await user.save();
-    res.redirect(`/users/${userId}/plants`);
-  } catch (error) {
-    console.error('Error adding plant: ', error);
-    res.status(500).send('Error adding plant');
-  }
-});
+// router.post('/', async (req, res) => {
+//   try {
+//     const userId = req.session.user._id;
+//     const user = await User.findById(userId);
+//     user.cabinet.push(req.body);
+//     await user.save();
+//     res.redirect(`/users/${userId}/plants`);
+//   } catch (error) {
+//     console.error('Error adding plant: ', error);
+//     res.status(500).send('Error adding plant');
+//   }
+// });
 
 // delete
 router.delete('/:itemId', async (req, res) => {
