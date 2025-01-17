@@ -1,6 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user.js');
+const Plant = require('../models/plant');
+const moment = require('moment');
+
+
+
+
+
 
 // Index
 router.get('/:userId', async (req, res) => {
@@ -70,7 +74,4 @@ router.get('/:itemId', async (req, res) => {
   }
 });
 
-// 
-
-
-module.exports = router;
+module.exports = { index, newPlant, postPlant, editPlant, updatePlant, showPlant, deletePlant, addComment }
