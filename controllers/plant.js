@@ -58,8 +58,20 @@ async function addComment(req, res) {
 }
 
 async function showPlant(req, res) {
-  
+  try {
+    const plant = await Plant.findById(req.params.id);
+    if(plant) {
+      res.render('plants/show', { title: 'Plant Details', plant });
+    } else {
+      res.status(404).render('404/notfound', { title: 'Plant Not Found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 }
+
+
 
 // Index
 // router.get('/:userId', async (req, res) => {
