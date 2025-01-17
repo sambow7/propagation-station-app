@@ -71,7 +71,16 @@ async function showPlant(req, res) {
   }
 }
 
-
+async function editPlant(req, res) {
+  try {
+    const plant = await Plant.findById(req.params.id);
+    if(plant) {
+      res.render('plants/edit', { title: 'Edit Plant', plant });
+    } else {
+      res.status(404).render('404/notfound', { title: 'Plant Not Found' });
+    }
+  
+}
 
 // Index
 // router.get('/:userId', async (req, res) => {
@@ -128,17 +137,17 @@ async function showPlant(req, res) {
 // });
 
 // show
-router.get('/:itemId', async (req, res) => {
-  try {
-    const userId = req.session.user._id;
-    const { itemId } = req.params;
-    const user = await User.findById(userId);
-    console.log(plantItem)
-    res.render('plants/show.ejs', { plantItem, user })
-  } catch (error) {
-    console.error('Error loading plant: ', error);
-    res.status(500).send('Error loading plant');
-  }
-});
+// router.get('/:itemId', async (req, res) => {
+//   try {
+//     const userId = req.session.user._id;
+//     const { itemId } = req.params;
+//     const user = await User.findById(userId);
+//     console.log(plantItem)
+//     res.render('plants/show.ejs', { plantItem, user })
+//   } catch (error) {
+//     console.error('Error loading plant: ', error);
+//     res.status(500).send('Error loading plant');
+//   }
+// });
 
 module.exports = { index, newPlant, postPlant, editPlant, updatePlant, showPlant, deletePlant, addComment }
