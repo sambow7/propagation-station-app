@@ -1,5 +1,5 @@
 const Plant = require('../models/plant');
-const plants = require('../models/plants');
+const plants = require('../data/plants');
 
 async function seedData(req, res) {
   try {
