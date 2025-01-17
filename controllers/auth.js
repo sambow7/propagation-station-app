@@ -41,6 +41,10 @@ async function signInPost(req, res) {
     if (!username || !password) {
       return res.status(400).json({ message: 'All fields are required' });
     }
+    const userInDatabase = await User.findOne({ username });
+    if (!userInDatabase) {
+      return res.status(400).json({ message: 'Invalid username or password' });
+    }
   }
 
 // router.get('/sign-in', (req, res) => {
