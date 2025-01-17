@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('../partials/head') %>
+    <title>Plants 🪴</title>
+</head>
+
+<body>
+  <% if (user) { %>
+    <!-- Navigation Bar -->
+    <nav class="teal">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center"> 🪴 Plants 🪴</a>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="center-align" id="bottomMargin">
+        <a href="/plants" class="btn">Go to Plants Page</a>
+      </div>
+      <div class="center-align" style="margin-top: 40px;">
+        <!-- new sign out link -->
+        <a href="/auth/sign-out" class="btn teal center-align">Sign out</a>
+      </div>
+    </div>
+    <% } else { %>
+
+      <!-- Welcome message for guests -->
+      <div class="welcome-message">
+        <h4>Welcome to the app, guest.</h4>
+        <p>
+          <a href="/auth/sign-up" class="btn teal">Sign up</a> or <a href="/auth/sign-in" class="btn teal">Sign in</a>
+        </p>
+      </div>
+
+      <% } %>
+</body>
+
+</html>
