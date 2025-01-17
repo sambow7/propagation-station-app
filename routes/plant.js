@@ -2,13 +2,13 @@ const router = require('express').Router();
 const plantCtrl = require('../controllers/plant');
 
 router.get('/plants', plantCtrl.index);
-router.get('/plants/new', plantCtrl.newplant);
-router.post('/plants', plantCtrl.postplant);
+router.get('/plants/new', plantCtrl.newPlant);
+router.post('/plants', plantCtrl.postPlant);
 router.post('/plants/:id/comments', plantCtrl.addComment);
-router.get('/plants/:id', plantCtrl.showplant);
-router.get('/plants/:id/edit', plantCtrl.editplant);
-router.put('/plants/:id', plantCtrl.updateplant);
-router.delete('/plants/:id', plantCtrl.deleteplant);
+router.get('/plants/:id', plantCtrl.showPlant);
+router.get('/plants/:id/edit', plantCtrl.editPlant);
+router.put('/plants/:id', plantCtrl.updatePlant);
+router.delete('/plants/:id', plantCtrl.deletePlant);
 
 
 
