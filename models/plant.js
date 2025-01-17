@@ -1,23 +1,20 @@
 const mongoose = require('mongoose');
 
-const careComment = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
   content: String,
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 }, { timestamps: true })
 
-const commentSchema = new mongoose.Schema({
-  text: {
-    type: String,
-    required: true,
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
-});
+const plantSchema = new mongoose.Schema({
+  title: String,
+  author: String,
+  comments: [commentSchema],
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+}, { timestamps: true });
 
+const Plant = mongoose.model('Plant', plantSchema);
 
-module.exports = mongoose.model('Care', careSchema, 'Comment' , commentSchema);
+module.exports = Plant;
