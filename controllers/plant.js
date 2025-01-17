@@ -23,7 +23,42 @@ function newPlant(req, res) {
 }
 
 async function postPlant(req, res) {
-  try {}
+  try {
+    if(!req.session.user) {
+      return res.redirect('/auth/sign-in');
+    }
+    console.log(req.session.user);
+
+    const newPlant = {
+      ...req.body,
+      createdBy: req.session.user.id
+    };
+    await Plant.create(newPlant);
+    res.status(200).redirect('/plants');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
+async function addComment(req, res) {
+  try {
+    const plant = await Plant.findById(req.params.id);
+    const newComment = {
+      ...req.body,
+      createdBy: req.session.user.id
+    }
+    plant.comments.push(newComment);
+    await plant.save();
+    res.status(500).redirect('plansts')
+  } catch (error) {
+    console.error('Error adding new commment', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
+async function showPlant(req, res) {
+  
 }
 
 // Index
@@ -65,20 +100,20 @@ async function postPlant(req, res) {
 // });
 
 // delete
-router.delete('/:itemId', async (req, res) => {
-  try {
-    const userId = req.session.user._id;
-    const { itemId } = req.params;
-    const user = await User.findById(userId);
-    const plantItemIndex = user.cabinet.findIndex(plant => plant._id.toString() === itemId);
-    user.cabinet.splice(plantItemIndex, 1);
-    await user.save();
-    res.redirect(`/users/${userId}/plants`);
-  } catch (error) {
-    console.error('Error deleting plant: ', error);
-    res.redirect('/');
-  }
-});
+// router.delete('/:itemId', async (req, res) => {
+//   try {
+//     const userId = req.session.user._id;
+//     const { itemId } = req.params;
+//     const user = await User.findById(userId);
+//     const plantItemIndex = user.cabinet.findIndex(plant => plant._id.toString() === itemId);
+//     user.cabinet.splice(plantItemIndex, 1);
+//     await user.save();
+//     res.redirect(`/users/${userId}/plants`);
+//   } catch (error) {
+//     console.error('Error deleting plant: ', error);
+//     res.redirect('/');
+//   }
+// });
 
 // show
 router.get('/:itemId', async (req, res) => {
