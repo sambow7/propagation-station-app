@@ -1,3 +1,4 @@
+<!--views/plants/index.ejs-->
 <!DOCTYPE html>
 <html>
 
@@ -13,19 +14,15 @@
 <body>
   <nav>
     <div class="nav-wrapper teal">
-      <a href="/" class="brand-logo center">Library</a>
+      <a href="/" class="brand-logo center">Cabinet</a>
     </div>
   </nav>
   <div class="container">
-    <h1 class="center-align">plants List</h1>
+    <h1 class="center-align">Plants List</h1>
     <ul class="collection">
       <% plants.forEach(plant=> { %>
         <li class="collection-item">
-          <a href="/plants/<%= plant._id %>">
-            <strong>
-              <%= plant.name %>
-            </strong> by <%= plant.author %>
-          </a>
+          <a href="/plants/<%= plant._id %>"><strong><%= plant.name %> </strong> by <%= plant.author %></a>
           <div class="plant-container">
             <span class="created-by">
               Created by: <strong>

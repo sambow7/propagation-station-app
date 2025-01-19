@@ -1,3 +1,4 @@
+<!--views/plants/new.ejs-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,25 +13,34 @@
 
 <body>
   <%- include('../partials/nav') %>
-
     <div class="container" id="bottomMargin">
       <h1 class="center-align">Add a New Plant</h1>
-      <form action="/plants" method="POST" class="col s12">
+
+      <form action="/plants" method="POST" enctype="multipart/form-data class=" col s12">
         <div class="row">
           <div class="input-field col s12">
             <input type="text" name="name" id="name" required>
-            <label for="name">Name</label>
+            <label for="name">Plant Name</label>
           </div>
         </div>
+
         <div class="row">
           <div class="input-field col s12">
             <input type="text" name="author" id="author" required>
             <label for="author">Author</label>
           </div>
         </div>
+     
+        <div class="row left-align">
+          <div class="input-field">
+            <label for="coverImage">Image URL:</label>
+            <input type="url" name="coverImage" id="coverImage" placeholder="https://example.com/image.jpg">
+          </div>
+        </div>
+
         <div class="row center-align">
           <button class="btn wave-affect waves-ligth teal">Submit</button>
-          <a href="/plants" class="btn waves-effect waves-light orange">Back</a>
+          <a href="/plants" class="btn waves-effect light-green lighten-3">Back</a>
         </div>
       </form>
     </div>

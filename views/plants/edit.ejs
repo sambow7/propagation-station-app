@@ -1,3 +1,4 @@
+<!--views/plants/edit.ejs-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,15 +45,15 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea name="description" id="description" class="materialize-textarea"
-              required><%= plant.description %></textarea>
-            <label for="description">Description</label>
+            <textarea name="care" id="care" class="materialize-textarea"
+              required><%= plant.care %></textarea>
+            <label for="care">Care</label>
           </div>
         </div>
         <div class="row center-align">
           <button type="submit" class="btn wave-effect waves-light teal">Update Plant</button>
       </form>
-      <a href="/plants" class="btn waves-effect waves-light orange">Back</a>
+      <a href="/plants" class="btn waves-effect light-green lighten-3">Back</a>
       <form action="/plants/<%= plant.id %>?_method=DELETE" method="POST" style="display: inline">
         <button type="submit" class="btn red darken-1">Delete Plant</button>
       </form>

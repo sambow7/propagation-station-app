@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to bottom, #000000, #005003); /* Green gradient */
+  background: linear-gradient(to bottom, #a5d6a7, #005003); /* Green gradient */
   font-family: 'Roboto', sans-serif;
   padding-top: 30px;
 }
@@ -10,7 +10,7 @@ body {
 }
 
 .form-container {
-  background: #ffffff;
+  background: #000000;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -37,7 +37,7 @@ input {
 
 button {
   background-color: #43a047;
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 12px;
   border-radius: 5px;
@@ -67,7 +67,7 @@ a.btn {
   text-align: center;
 }
 
-.library-image {
+.cabinet-image {
   max-width: 100%;
   height: auto;
   border-radius: 15px;
@@ -84,13 +84,16 @@ a.btn {
 nav {
   background: linear-gradient(to right, #4caf50, #2e7d32); 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-nav {
   position: sticky;
   top: 0;
   z-index: 1000;
 }
+
+/* nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+} */
 
 .nav-wrapper .brand-logo {
   font-family: 'Roboto', sans-serif;

@@ -1,3 +1,4 @@
+<!--views/plants/show.ejs-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +34,7 @@
                 <p><strong>Published:</strong>
                   <%= plant.published %>
                 </p>
-                <%- plant.description %>
+                <%- plant.care %>
                   </p>
               </div>
             </div>
@@ -44,7 +45,7 @@
 
     <div class="center-align" style="margin-top: 40px;">
       <a href="/plants" class="btn blue darken-1">Return to Plants Page</a>
-      <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect waves-light orange">Edit Plant</a>
+      <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect light-green lighten-3">Edit Plant</a>
     </div>
 </body>
 

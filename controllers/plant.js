@@ -31,6 +31,7 @@ async function postPlant(req, res) {
 
     const newPlant = {
       ...req.body,
+      coverImage: req.body.coverImage,
       createdBy: req.session.user.id
     };
     await Plant.create(newPlant);
