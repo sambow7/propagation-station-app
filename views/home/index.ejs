@@ -1,3 +1,4 @@
+<!--views/home/index.ejs-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,30 +11,30 @@
 
 <body>
   <%- include('../partials/nav') %>
-  <% if (user) { %>
-    <nav class="teal">
-      <div class="nav-wrapper">
-        <a href="/" class="brand-logo center"> 🪴 Plants 🪴</a>
+    <% if (user) { %>
+      <nav class="teal">
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo center"> 🪴 Plants 🪴</a>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="center-align" id="bottomMargin">
+          <a href="/plants" class="btn waves-effect teal darken-4">Go to Plants Page</a>
+        </div>
+        <div class="center-align" style="margin-top: 40px;">
+          <a href="/auth/sign-out" class="btn waves-effect teal darken-4">Sign out</a>
+        </div>
       </div>
-    </nav>
-    <div class="container">
-      <div class="center-align" id="bottomMargin">
-        <a href="/plants" class="btn">Go to Plants Page</a>
-      </div>
-      <div class="center-align" style="margin-top: 40px;">
-        <a href="/auth/sign-out" class="btn teal center-align">Sign out</a>
-      </div>
-    </div>
-    <% } else { %>
+      <% } else { %>
 
-      <div class="welcome-message">
-        <h4>Welcome to the app, guest.</h4>
-        <p>
-          <a href="/auth/sign-up" class="btn teal">Sign up</a> or <a href="/auth/sign-in" class="btn teal">Sign in</a>
-        </p>
-      </div>
+        <div class="welcome-message">
+          <h4>Welcome to the app, guest.</h4>
+          <p>
+            <a href="/auth/sign-up" class="btn teal">Sign up</a> or <a href="/auth/sign-in" class="btn teal">Sign in</a>
+          </p>
+        </div>
 
-      <% } %>
+        <% } %>
 </body>
 
 </html>

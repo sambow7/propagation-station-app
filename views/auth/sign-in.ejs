@@ -1,3 +1,4 @@
+<!-- views/auth/sign-in page -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +11,21 @@
 
 <body>
   <div class="container">
-    <div class="form-container">
-      <h4>Welcome back to Propagation Station! 🌱</h4>
+    <div class="form-container teal darken-4">
+      <h4 calss="center-align">🌱 Welcome <br> to <br> Propagation Station! 🌱</h4>
       <form action="/auth/sign-in" method="POST">
         <div class="input-field">
           <label for="username">Username:</label>
           <input type="text" name="username" id="username" />
         </div>
-        <div class="input-field">
+        <div class="input-field " >
           <label for="password">Password:</label>
           <input type="password" name="password" id="password" />
         </div>
         <button type="submit" class="btn teal waves-effect waves-light">Sign in</button>
         <br>
         <br>
-        <p>Join the Green Community! 🌿 </p>
+        <p class="">🌿 Join the Green Community! 🌿 </p>
         <a href="/auth/sign-up" class="btn waves-effect teal darken-4">Sign Up</a>
       </form>
     </div>

@@ -1,4 +1,4 @@
 module.exports = [
-  { name: 'Pothos', descrpiton: 'global green' },
-  { name: 'Alocasia', descrpiton: 'quilted' },
+  { name: '', descrpiton: 'global green' },
+  { name: '', descrpiton: 'quilted' },
 ];

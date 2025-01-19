@@ -2,68 +2,63 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    <%= title %>
-  </title>
-  <%- include('../partials/head') %>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      <%= title %>
+    </title>
+    <%- include('../partials/head') %>
+  </head>
 
-<body>
-  <nav>
-    <div class="nav-wrapper teal">
-      <a href="/" class="brand-logo center">Cabinet</a>
-    </div>
-  </nav>
-  <div class="container">
-    <h1 class="center-align">Plants List</h1>
-    <ul class="collection">
-      <% plants.forEach(plant=> { %>
-        <li class="collection-item">
-          <a href="/plants/<%= plant._id %>"><strong><%= plant.name %> </strong> by <%= plant.author %></a>
-          <div class="plant-container">
-            <span class="created-by">
-              Created by: <strong>
-                <%= plant.createdBy ? plant.createdBy.username : 'Unknown' %>
-              </strong>
-            </span>
-            <span class="created-by">
-              <%= plant.formattedDate ? plant.formattedDate : 'Date not available' %>
-            </span>
-          </div>
-          <% plant.comments.forEach(comment=> { %>
-            <p class="comment">
-              <% if (comment.createdBy) { %>
-                <%= comment.createdBy.username %>
-                  <% } %>
-                    <%= comment.content %>
-            </p>
-            <% }) %>
-              <form action="/plants/<%= plant._id %>/comments" method="POST">
-                <div class="row">
-                  <form class="col s12">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <i class="material-icons prefix">comment</i>
-                        <textarea name="content" id="icon_prefix2" class="tiny materialize-textarea"></textarea>
-                        <input class="comment-input" type="submit" value="Comment">
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container">
+      <h1 class="center-align">Plants List</h1>
+      <div class="center-align">
+        <a href="/plants/new" class="btn waves-effect waves-light teal">Add a New Plant</a>
+      </div>
+      
+      <ul class="collection">
+        <% plants.forEach(plant=> { %>
+          <li class="collection-item">
+            <a href="/plants/<%= plant._id %>"><strong><%= plant.name %> </strong> Prop: <%= plant.propagation %></a>
+            <div class="plant-container">
+              <span class="created-by">
+                Created by: <strong>
+                  <%= plant.createdBy ? plant.createdBy.username : 'Unknown' %>
+                </strong>
+              </span>
+              <span class="created-by">
+                <%= plant.formattedDate ? plant.formattedDate : 'Date not available' %>
+              </span>
+            </div>
+            <% plant.comments.forEach(comment=> { %>
+              <p class="comment">
+                <% if (comment.createdBy) { %>
+                  <%= comment.createdBy.username %>
+                    <% } %>
+                      <%= comment.content %>
+              </p>
+              <% }) %>
+                <form action="/plants/<%= plant._id %>/comments" method="POST">
+                  <div class="row">
+                    <form class="col s12">
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <i class="material-icons prefix">comment</i>
+                          <textarea name="content" id="icon_prefix2" class="tiny materialize-textarea"></textarea>
+                          <input class="comment-input" type="submit" value="Comment">
+                        </div>
                       </div>
-                    </div>
-                  </form>
-                </div>
-              </form>
-        </li>
-        <% }); %>
-    </ul>
-    <div class="center-align">
-      <a href="/plants/new" class="btn waves-effect waves-light teal">Add a New Plant</a>
+                    </form>
+                  </div>
+                </form>
+          </li>
+          <% }); %>
+      </ul>
     </div>
-  </div>
 
-
-
-</body>
+  </body>
 
 </html>

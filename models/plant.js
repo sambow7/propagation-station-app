@@ -10,11 +10,14 @@ const plantSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  care: String,
-  propagation: String,
-  wateringFrequency: String,
+  propagation: {
+    type: String,
+    required: true
+  },
+  watering: String,
   lighting: String,
   soil: String,
+  care: String,
   coverImage: String,
   comments: [commentSchema],
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }

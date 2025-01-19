@@ -28,14 +28,11 @@
             </div>
             <div class="left-align col s9">
               <div class="plant-details">
-                <p><strong>Author:</strong>
-                  <%= plant.author %>
-                </p>
-                <p><strong>Published:</strong>
-                  <%= plant.published %>
-                </p>
-                <%- plant.care %>
-                  </p>
+                <p><strong>  Propagation: </strong><%=  plant.propagation %>  </p>
+                <p><strong>  Watering:    </strong><%=  plant.watering %>     </p>
+                <p><strong>  Lighting:    </strong><%=  plant.lighting %>     </p>
+                <p><strong>  Soil:        </strong><%=  plant.soil %>         </p>
+                </p><strong> Care:        </strong><%=  plant.care %>         </p>
               </div>
             </div>
           </div>
@@ -44,8 +41,8 @@
     </div>
 
     <div class="center-align" style="margin-top: 40px;">
-      <a href="/plants" class="btn blue darken-1">Return to Plants Page</a>
-      <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect light-green lighten-3">Edit Plant</a>
+      <a href="/plants" class="btn green darken-6">Return to Plants Page</a>
+      <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect light-green lighten-1">Edit Plant</a>
     </div>
 </body>
 

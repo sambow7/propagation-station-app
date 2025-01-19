@@ -22,37 +22,57 @@
         <div class="row">
           <div class="input-field col s12">
             <input type="text" name="name" id="name" value="<%= plant.name %>" required>
-            <label for="name">Name</label>
+            <label for="name">Plant Name</label>
           </div>
         </div>
+
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" name="author" id="author" value="<%= plant.author %>" required>
-            <label for="author">Author</label>
+            <input type="text" name="propagation" id="propagation" value="<%= plant.propagation %>" required>
+            <label for="propagation">Propagation</label>
           </div>
         </div>
+
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" name="published" id="published" value="<%= plant.published %>" required>
-            <label for="published">Published</label>
+            <input type="text" name="watering" id="watering" value="<%= plant.watering %>" required>
+            <label for="watering">Watering</label>
           </div>
         </div>
+
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" name="coverImage" id="coverImage" value="<%= plant.coverImage %>" required>
-            <label for="coverImage">Cover Image</label>
+            <input type="text" name="lighting" id="lighting" value="<%= plant.lighting %>" required>
+            <label for="lighting">Lighting</label>
           </div>
         </div>
+
         <div class="row">
           <div class="input-field col s12">
-            <textarea name="care" id="care" class="materialize-textarea"
-              required><%= plant.care %></textarea>
+            <input type="text" name="soil" id="soil" value="<%= plant.soil %>" required>
+            <label for="soil">Soil</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="care" id="care" value="<%= plant.care %>" required>
             <label for="care">Care</label>
           </div>
         </div>
+
+        <div class="row left-align">
+          <div class="input-field">
+            <label for="coverImage">Image URL:</label>
+            <input type="url" name="coverImage" id="coverImage" value="<%= plant.coverImage %>"
+              placeholder="https://example.com/image.jpg">
+          </div>
+        </div>
+
         <div class="row center-align">
           <button type="submit" class="btn wave-effect waves-light teal">Update Plant</button>
       </form>
+
       <a href="/plants" class="btn waves-effect light-green lighten-3">Back</a>
       <form action="/plants/<%= plant.id %>?_method=DELETE" method="POST" style="display: inline">
         <button type="submit" class="btn red darken-1">Delete Plant</button>
