@@ -1,12 +1,14 @@
+//<!--controllers/plant.js-->
+
 const Plant = require('../models/plant');
 const moment = require('moment');
 
 async function isCreator(plantId, userId) {
   const plant = await Plant.findById(plantId);
   if (!plant) {
-    return false; // Plant not found
+    return false;
   }
-  return plant.createdBy.equals(userId); // Compare ObjectId with user ID
+  return plant.createdBy.equals(userId);
 }
 
 async function index(req, res) {
@@ -27,11 +29,11 @@ async function index(req, res) {
     res.render('plants/index', { 
       title: 'Plant List 1', 
       plants: formattedPlant, 
-      user: req.session.user // Pass the user explicitly
+      user: req.session.user
     });
   } catch (error) {
     console.error(error);
-    req.flash('error', 'Error loading plants.'); // Flash error message
+    req.flash('error', 'Error loading plants.');
     res.status(500).redirect('/');
   }
 }
@@ -43,7 +45,7 @@ async function newPlant(req, res) {
     }
     res.render('plants/new', { 
       title: 'Add New Plant', 
-      user: req.session.user // Pass the user explicitly
+      user: req.session.user
     });
   } catch (error) {
     console.error(error);
@@ -61,7 +63,6 @@ async function postPlant(req, res) {
 
     const { name, propagation, coverImage, watering, lighting, soil, care } = req.body;
 
-    // Validate required fields
     if (!name || !propagation) {
       req.flash('error', 'Name and propagation method are required fields.');
       return res.status(400).redirect('/plants/new');
@@ -84,7 +85,6 @@ async function postPlant(req, res) {
   } catch (error) {
     console.error('Error creating plant:', error);
 
-    // Handle specific validation errors if needed
     if (error.name === 'ValidationError') {
       req.flash('error', 'Invalid plant data. Please try again.');
       return res.status(400).redirect('/plants/new');
@@ -118,7 +118,7 @@ async function showPlant(req, res) {
       res.render('plants/show', { 
         title: 'Plant Details', 
         plant, 
-        user: req.session.user // Pass the user explicitly
+        user: req.session.user
       });
     } else {
       res.status(404).render('404/notfound', { title: 'Plant Not Found' });
@@ -132,6 +132,7 @@ async function showPlant(req, res) {
 async function editPlant(req, res) {
   try {
     const plant = await Plant.findById(req.params.id);
+    console.log(plant);
     if (!plant) {
       req.flash('error', 'Plant not found.');
       return res.status(404).redirect('/plants');

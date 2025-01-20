@@ -17,7 +17,7 @@
   <div class="container">
     <h1 class="center-align">Edit Plant: <%= plant.name %></h1>
     <div class="row">
-      <form action="/plants/<%= plant.id %>?_method=PUT" method="POST" class="col s12">
+      <form action="/plants/<%= plant._id %>?_method=PUT" method="POST" class="col s12">
         <div class="row">
           <div class="input-field col s12">
             <input type="text" name="name" id="name" value="<%= plant.name %>" required>

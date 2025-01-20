@@ -2,7 +2,7 @@
 body {
   background: linear-gradient(to bottom, #003d00, #002200); /* Dark green gradient */
   font-family: "Gugi", serif;
-  color: #e8f5e9; /* Light green for readability */
+  color: #e8f5e9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,59 +22,54 @@ body {
   font-style: normal;
 }
 
-
 /* Navbar */
 nav {
-  background: #004d40; /* Dark teal */
+  background: #004d40;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .nav-wrapper .brand-logo {
-  color: #e0f2f1; /* Light teal */
+  color: #e0f2f1;
 }
 
-/* Form Container */
 .form-container {
-  background: #263238; /* Dark grey */
+  background: #263238;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Buttons */
 .btn {
-  background: #1b5e20; /* Dark green */
+  background: #1b5e20;
   color: #e8f5e9;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
-  background: #2e7d32; /* Lighter green */
+  background: #2e7d32;
 }
 
 /* Inputs */
 .input-field input {
-  background: #37474f; /* Dark input background */
-  color: #e0f7fa;
-  border: 1px solid #004d40; /* Teal border */
+  background: #37474f;
+  color: #006f1c;
+  border: 1px solid #004d40;
 }
 
 .input-field label {
-  color: #b2dfdb; /* Light teal */
+  color: #bcdfb2;
 }
 
 .input-field input:focus {
-  border-bottom: 1px solid #80cbc4; /* Highlighted teal */
+  border-bottom: 1px solid #80cbc4;
   box-shadow: 0 1px 0 0 #80cbc4;
 }
 
-/* Cards */
 .card {
   background: #263238;
   color: #e0f2f1;
 }
 
-/* Plant List */
 .plant-list li {
   background: #37474f;
   margin: 10px 0;
@@ -97,12 +92,12 @@ p {
 }
 
 nav ul li a {
-  color: #e0f2f1; /* Light teal */
+  color: #e0f2f1;
 }
 
 nav ul li a:hover {
-  color: #b2dfdb; /* Slightly lighter teal */
-  background: rgba(0, 77, 64, 0.2); /* Subtle hover effect */
+  color: #b2dfdb; 
+  background: rgba(0, 77, 64, 0.2); 
 }
 
 .btn, .input-field input {
@@ -114,7 +109,7 @@ nav ul li a:hover {
 }
 
 .input-field input:focus {
-  transform: scale(1.02); /* Slight growth for focus */
+  transform: scale(1.02); 
 }
 
 .plant-list {
@@ -133,7 +128,7 @@ footer {
   color: #e0f2f1;
   text-align: center;
   padding: 10px 0;
-  margin-top: auto; /* Push to bottom */
+  margin-top: auto;
 }
 
 footer a {
@@ -153,11 +148,11 @@ footer a:hover {
 }
 
 .alert-success {
-  background: #2e7d32; /* Success green */
+  background: #2e7d32;
   color: #e8f5e9;
 }
 
 .alert-error {
-  background: #b71c1c; /* Error red */
+  background: #b71c1c;
   color: #ffebee;
 }
