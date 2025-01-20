@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 
+// Session Middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -25,24 +26,26 @@ app.use(session({
   cookie: { secure: process.env.NODE_ENV === 'Production', httpOnly: true }
 }));
 
+// Make `user` session data available in all views
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
+// Set EJS as the template engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+// Static Files Middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Seed Route
+// Routes
 app.use('/', require('./routes/seed'));
-
-// Auth Route
 app.use('/', require('./routes/auth'));
-
-// Home Route
 app.use('/', require('./routes/home'));
-
-// Plant Route
 app.use('/', require('./routes/plant'));
 
-
+// Start the server
 app.listen(process.env.PORT, () => {
   console.log(`🎧 http://localhost:${process.env.PORT}`);
 });

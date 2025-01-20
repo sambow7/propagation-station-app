@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%- include('../partials/head') %>
-  <title>Sign In</title>
+  <title>Sign Up</title>
 </head>
 
 <body>
   <div class="container center-align">
     <div class="form-container teal darken-4 z-depth-2">
-      <h4>🌱 Welcome to Propagation Station! 🌱</h4>
-      <form action="/auth/sign-in" method="POST">
+      <h4>🌿 Join the Green Community! 🌿</h4>
+      <form action="/auth/sign-up" method="POST">
         <div class="input-field">
           <label for="username">Username:</label>
           <input type="text" name="username" id="username" required>
@@ -21,10 +21,12 @@
           <label for="password">Password:</label>
           <input type="password" name="password" id="password" required>
         </div>
-        <button type="submit" class="btn waves-effect teal lighten-1">Sign In</button>
+        <div class="input-field">
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" required>
+        </div>
+        <button type="submit" class="btn teal waves-effect waves-light">Sign Up</button>
       </form>
-      <p class="join-message">🌿 Join the Green Community! 🌿</p>
-      <a href="/auth/sign-up" class="btn waves-effect teal lighten-1">Sign Up</a>
     </div>
   </div>
 </body>

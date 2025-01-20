@@ -5,35 +5,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    <%= title %>
-  </title>
+  <title><%= title %></title>
   <%- include('../partials/head') %>
 </head>
 
 <body>
-  <%- include('../partials/nav') %>
-    <div class="container">
-      <div class="card">
-        <div class="card-content">
-          <header>
-            <h1 class="center-align">
-              <%= plant.name %>
-            </h1>
-          </header>
-          <div class="container row">
-            <div class="col s3">
-              <img class="responsive-image" src="<%= plant.coverImage %>" alt="<%= plant.name %>"
-                style="max-height: 200px;">
-            </div>
-            <div class="left-align col s9">
-              <div class="plant-details">
-                <p><strong>  Propagation: </strong><%=  plant.propagation %>  </p>
-                <p><strong>  Watering:    </strong><%=  plant.watering %>     </p>
-                <p><strong>  Lighting:    </strong><%=  plant.lighting %>     </p>
-                <p><strong>  Soil:        </strong><%=  plant.soil %>         </p>
-                </p><strong> Care:        </strong><%=  plant.care %>         </p>
-              </div>
+  <%- include('../partials/nav', { user: user }) %>
+
+  <div class="container" id="bottomMargin">
+    <div class="card">
+      <div class="card-content">
+        <header>
+          <h1 class="center-align green-text text-darken-2">
+            <%= plant.name %>
+          </h1>
+        </header>
+        <div class="row">
+          <div class="col s12 m4">
+            <img class="responsive-img z-depth-2" src="<%= plant.coverImage %>" alt="<%= plant.name %>"
+              style="max-height: 300px; border-radius: 10px;">
+          </div>
+          <div class="col s12 m8">
+            <div class="plant-details">
+              <p><strong>Propagation:</strong> <%= plant.propagation %></p>
+              <p><strong>Watering:</strong> <%= plant.watering %></p>
+              <p><strong>Lighting:</strong> <%= plant.lighting %></p>
+              <p><strong>Soil:</strong> <%= plant.soil %></p>
+              <p><strong>Care:</strong> <%= plant.care %></p>
             </div>
           </div>
         </div>
@@ -41,9 +39,10 @@
     </div>
 
     <div class="center-align" style="margin-top: 40px;">
-      <a href="/plants" class="btn green darken-6">Return to Plants Page</a>
-      <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect light-green lighten-1">Edit Plant</a>
+      <a href="/plants" class="btn waves-effect light-green lighten-2">Return to Plants Page</a>
+      <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect teal darken-4">Edit Plant</a>
     </div>
+  </div>
 </body>
 
 </html>

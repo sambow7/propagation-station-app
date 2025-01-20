@@ -1,8 +1,18 @@
 <!--views/partials/nav.ejs-->
-<nav>
-  <div class="nav-wrapper green darken-2">
+<nav class="green darken-2">
+  <div class="nav-wrapper">
     <a href="/" class="brand-logo center">
-      <img src="https://i.pinimg.com/736x/db/84/78/db8478c2cfe8b2316d241049e4a4074b.jpg" alt="Plant logo" style="height: 40px; vertical-align: middle;"> Propagation Station
+      <img src="https://i.pinimg.com/736x/db/84/78/db8478c2cfe8b2316d241049e4a4074b.jpg" alt="Plant logo" style="height: 40px; vertical-align: middle;"> 
+      Propagation Station
     </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if (user) { %>
+        <li><a href="/plants" class="waves-effect">Plants</a></li>
+        <li><a href="/auth/sign-out" class="waves-effect">Sign Out</a></li>
+      <% } else { %>
+        <li><a href="/auth/sign-up" class="waves-effect">Sign Up</a></li>
+        <li><a href="/auth/sign-in" class="waves-effect">Sign In</a></li>
+      <% } %>
+    </ul>
   </div>
 </nav>

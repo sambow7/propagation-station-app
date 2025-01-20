@@ -1,64 +1,63 @@
 <!--views/plants/index.ejs-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-      <%= title %>
-    </title>
-    <%- include('../partials/head') %>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plants List</title>
+  <%- include('../partials/head') %>
+</head>
 
-  <body>
-    <%- include('../partials/nav') %>
-    <div class="container">
-      <h1 class="center-align">Plants List</h1>
-      <div class="center-align">
-        <a href="/plants/new" class="btn waves-effect waves-light teal">Add a New Plant</a>
-      </div>
-      
-      <ul class="collection">
-        <% plants.forEach(plant=> { %>
-          <li class="collection-item">
-            <a href="/plants/<%= plant._id %>"><strong><%= plant.name %> </strong> Prop: <%= plant.propagation %></a>
-            <div class="plant-container">
-              <span class="created-by">
-                Created by: <strong>
-                  <%= plant.createdBy ? plant.createdBy.username : 'Unknown' %>
-                </strong>
-              </span>
-              <span class="created-by">
-                <%= plant.formattedDate ? plant.formattedDate : 'Date not available' %>
-              </span>
-            </div>
-            <% plant.comments.forEach(comment=> { %>
-              <p class="comment">
-                <% if (comment.createdBy) { %>
-                  <%= comment.createdBy.username %>
-                    <% } %>
-                      <%= comment.content %>
-              </p>
-              <% }) %>
-                <form action="/plants/<%= plant._id %>/comments" method="POST">
-                  <div class="row">
-                    <form class="col s12">
-                      <div class="row">
-                        <div class="input-field col s6">
-                          <i class="material-icons prefix">comment</i>
-                          <textarea name="content" id="icon_prefix2" class="tiny materialize-textarea"></textarea>
-                          <input class="comment-input" type="submit" value="Comment">
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </form>
-          </li>
-          <% }); %>
-      </ul>
+<body>
+  <%- include('../partials/nav', { user: user }) %>
+
+  <div class="container">
+    <h1 class="center-align">Plants List</h1>
+    <div class="row center-align">
+      <a href="/plants/new" class="btn waves-effect teal darken-4">Add a New Plant</a>
     </div>
 
-  </body>
+    <% if (plants.length === 0) { %>
+      <p class="center-align">No plants found. Add a new plant to get started!</p>
+    <% } else { %>
+      <ul class="plant-list">
+        <% plants.forEach(plant => { %>
+          <li class="card z-depth-2" style="margin: 20px; padding: 20px; border-radius: 10px;">
+            <div class="row">
+              <div class="col s3">
+                <img src="<%= plant.coverImage || 'https://via.placeholder.com/150' %>" alt="<%= plant.name %>" class="responsive-img" style="border-radius: 10px;">
+              </div>
+              <div class="col s9">
+                <h5><a href="/plants/<%= plant._id %>" class="teal-text"><strong><%= plant.name %></strong></a></h5>
+                <p><em>Propagation: <%= plant.propagation %></em></p>
+                <div class="plant-container">
+                  <p class="created-by">
+                    <strong>Created by:</strong> <%= plant.createdBy ? plant.createdBy.username : 'Unknown' %>
+                  </p>
+                  <p><strong>Date:</strong> <%= plant.formattedDate || 'Date not available' %></p>
+                </div>
+                <% plant.comments.forEach(comment => { %>
+                  <p class="comment">
+                    <strong><%= comment.createdBy ? comment.createdBy.username : 'Anonymous' %>:</strong>
+                    <%= comment.content %>
+                  </p>
+                <% }); %>
+              </div>
+            </div>
+            <form action="/plants/<%= plant._id %>/comments" method="POST">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea name="content" class="materialize-textarea" placeholder="Add a comment..."></textarea>
+                  <button type="submit" class="btn teal darken-4">Add Comment</button>
+                </div>
+              </div>
+            </form>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
 
 </html>
