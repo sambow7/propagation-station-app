@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const MongoConnect = require('connect-mongo');
 const path = require('path');
+const flash = require('connect-flash');
 
 require('./configs/database');
 
@@ -25,12 +26,18 @@ app.use(session({
   }),
   cookie: { secure: process.env.NODE_ENV === 'Production', httpOnly: true }
 }));
+app.use(flash());
 
 // Make `user` session data available in all views
 app.use((req, res, next) => {
-  res.locals.user = req.session.user || null;
+  res.locals.messages = req.flash();
   next();
 });
+
+// app.use((req, res, next) => {
+//   res.locals.user = req.session.user || null;
+//   next();
+// });
 
 // Set EJS as the template engine
 app.set('view engine', 'ejs');
