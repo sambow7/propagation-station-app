@@ -5,6 +5,13 @@ function signUp(req, res) {
   res.render('auth/sign-up.ejs');
 }
 
+function requireAuth(req, res, next) {
+  if (!req.session.user) {
+    return res.redirect('/auth/sign-in');
+  }
+  next();
+}
+
 async function signUpPost(req, res) {
   try {
     const { username, password, confirmPassword } = req.body;
@@ -71,4 +78,4 @@ function signout(req, res) {
   })
 }
 
-module.exports = { signUp, signUpPost, signIn, signInPost, signout };
+module.exports = { signUp, signUpPost, signIn, signInPost, signout, requireAuth };

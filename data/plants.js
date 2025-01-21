@@ -1,4 +1,25 @@
 module.exports = [
-  { name: '', descrpiton: 'global green' },
-  { name: '', descrpiton: 'quilted' },
+  {
+    name: "",
+    propagation: "",
+    watering: "",
+    lighting: "",
+    soil: "",
+    care: "",
+    coverImage: "",
+    comments: [],
+    createdBy: null,
+  },
+  
+  {
+    name: "",
+    propagation: "",
+    watering: "",
+    lighting: "",
+    soil: "",
+    care: "",
+    coverImage: "",
+    comments: [],
+    createdBy: null,
+  },
 ];

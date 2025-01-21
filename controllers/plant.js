@@ -3,6 +3,7 @@
 const Plant = require('../models/plant');
 const moment = require('moment');
 
+
 async function isCreator(plantId, userId) {
   const plant = await Plant.findById(plantId);
   if (!plant) {
@@ -26,9 +27,9 @@ async function index(req, res) {
       formattedDate: moment(plant.createdAt).fromNow()
     }));
 
-    res.render('plants/index', { 
-      title: 'Plant List 1', 
-      plants: formattedPlant, 
+    res.render('plants/index', {
+      title: 'Plant List 1',
+      plants: formattedPlant,
       user: req.session.user
     });
   } catch (error) {
@@ -43,8 +44,8 @@ async function newPlant(req, res) {
     if (!req.session.user) {
       return res.redirect('/auth/sign-in'); // Ensure only logged-in users can add plants
     }
-    res.render('plants/new', { 
-      title: 'Add New Plant', 
+    res.render('plants/new', {
+      title: 'Add New Plant',
       user: req.session.user
     });
   } catch (error) {
@@ -55,43 +56,31 @@ async function newPlant(req, res) {
 }
 
 async function postPlant(req, res) {
+  console.log('Submitted Data:', req.body); // Add here
+
+  const { name, propagation, coverImage, watering, lighting, soil, care } = req.body;
+
+  if (!name || !propagation) {
+    req.flash('error', 'Name and propagation method are required.');
+    return res.status(400).redirect('/plants/new');
+  }
+
   try {
-    if (!req.session.user) {
-      req.flash('error', 'You must be logged in to add a plant.');
-      return res.redirect('/auth/sign-in');
-    }
-
-    const { name, propagation, coverImage, watering, lighting, soil, care } = req.body;
-
-    if (!name || !propagation) {
-      req.flash('error', 'Name and propagation method are required fields.');
-      return res.status(400).redirect('/plants/new');
-    }
-
     const newPlant = new Plant({
-      name: name.trim(),
-      propagation: propagation.trim(),
-      coverImage: coverImage?.trim(),
-      watering: watering?.trim(),
-      lighting: lighting?.trim(),
-      soil: soil?.trim(),
-      care: care?.trim(),
-      createdBy: req.session.user.id,
+      name,
+      propagation,
+      coverImage,
+      watering,
+      lighting,
+      soil,
+      care,
+      createdBy: req.session.user.id, // Ensure the user is assigned
     });
-
     await newPlant.save();
-    req.flash('success', 'Plant added successfully!');
-    res.status(201).redirect('/plants');
+    res.redirect('/plants');
   } catch (error) {
-    console.error('Error creating plant:', error);
-
-    if (error.name === 'ValidationError') {
-      req.flash('error', 'Invalid plant data. Please try again.');
-      return res.status(400).redirect('/plants/new');
-    }
-
-    req.flash('error', 'An unexpected error occurred while creating the plant.');
-    res.status(500).redirect('/plants/new');
+    console.error('Error saving plant:', error);
+    res.status(500).send('Internal Server Error');
   }
 }
 
@@ -115,9 +104,9 @@ async function showPlant(req, res) {
   try {
     const plant = await Plant.findById(req.params.id).populate('createdBy', 'username').populate('comments.createdBy', 'username');
     if (plant) {
-      res.render('plants/show', { 
-        title: 'Plant Details', 
-        plant, 
+      res.render('plants/show', {
+        title: 'Plant Details',
+        plant,
         user: req.session.user
       });
     } else {
@@ -137,7 +126,7 @@ async function editPlant(req, res) {
       req.flash('error', 'Plant not found.');
       return res.status(404).redirect('/plants');
     }
-
+    //prevent from editing plant
     if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to edit this plant.');
       return res.redirect('/plants');
@@ -197,4 +186,6 @@ async function deletePlant(req, res) {
   }
 }
 
-module.exports = { index, newPlant, postPlant, editPlant, updatePlant, showPlant, deletePlant, addComment }
+
+
+module.exports = { index, newPlant, postPlant, editPlant, updatePlant, showPlant, deletePlant, addComment, isCreator };
