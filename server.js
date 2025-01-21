@@ -7,6 +7,9 @@ const session = require('express-session');
 const MongoConnect = require('connect-mongo');
 const path = require('path');
 const flash = require('connect-flash');
+const multer = require('multer');
+const upload = multer();
+
 
 require('./configs/database');
 
@@ -33,6 +36,11 @@ app.use((req, res, next) => {
   res.locals.messages = req.flash();
   next();
 });
+app.use((req, res, next) => {
+  console.log('Request Content-Type:', req.headers['content-type']);
+  console.log('Request Body:', req.body);
+  next();
+});
 
 // app.use((req, res, next) => {
 //   res.locals.user = req.session.user || null;
@@ -45,6 +53,8 @@ app.set('views', './views');
 
 // Static Files Middleware
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(upload.none());
 
 // Routes
 app.use('/', require('./routes/seed'));

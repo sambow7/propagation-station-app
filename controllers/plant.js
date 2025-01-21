@@ -56,7 +56,9 @@ async function newPlant(req, res) {
 }
 
 async function postPlant(req, res) {
-  console.log('Submitted Data:', req.body); // Add here
+  console.log('Submitted Data:', req.body);
+  console.log('Session User:', req.session.user);
+  console.log('Parsed Body:', req.body);
 
   const { name, propagation, coverImage, watering, lighting, soil, care } = req.body;
 
@@ -69,11 +71,11 @@ async function postPlant(req, res) {
     const newPlant = new Plant({
       name,
       propagation,
-      coverImage,
       watering,
       lighting,
       soil,
       care,
+      coverImage,
       createdBy: req.session.user.id, // Ensure the user is assigned
     });
     await newPlant.save();
@@ -102,12 +104,15 @@ async function addComment(req, res) {
 
 async function showPlant(req, res) {
   try {
-    const plant = await Plant.findById(req.params.id).populate('createdBy', 'username').populate('comments.createdBy', 'username');
+    const plant = await Plant.findById(req.params.id)
+      .populate('createdBy', 'username')
+      .populate('comments.createdBy', 'username');
+
     if (plant) {
       res.render('plants/show', {
         title: 'Plant Details',
         plant,
-        user: req.session.user
+        user: req.session.user, // Pass the session user for view-specific logic
       });
     } else {
       res.status(404).render('404/notfound', { title: 'Plant Not Found' });
