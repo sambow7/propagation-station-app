@@ -102,6 +102,31 @@ async function addComment(req, res) {
   }
 }
 
+async function editComment(req, res) {
+  try {
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) {
+      req.flash('error', 'Comment not found.');
+      return res.status(404).redirect('back');
+    }
+
+    // Ensure only the owner can edit
+    if (comment.createdBy.toString() !== req.session.user.id) {
+      req.flash('error', 'You are not authorized to edit this comment.');
+      return res.redirect('back');
+    }
+
+    comment.content = req.body.content;
+    await comment.save();
+    req.flash('success', 'Comment updated successfully.');
+    res.redirect('back');
+  } catch (error) {
+    console.error('Error updating comment:', error);
+    req.flash('error', 'An error occurred while updating the comment.');
+    res.status(500).redirect('back');
+  }
+}
+
 async function showPlant(req, res) {
   try {
     const plant = await Plant.findById(req.params.id)
@@ -191,6 +216,27 @@ async function deletePlant(req, res) {
   }
 }
 
+async function showUserPlants(req, res) {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      req.flash('error', 'User not found.');
+      return res.status(404).redirect('/plants');
+    }
+
+    const plants = await Plant.find({ createdBy: user._id });
+    res.render('users/plants', {
+      title: `${user.username}'s Plants`,
+      plants,
+      user,
+    });
+  } catch (error) {
+    console.error('Error fetching user plants:', error);
+    req.flash('error', 'An error occurred while fetching the plants.');
+    res.status(500).redirect('/plants');
+  }
+}
 
 
-module.exports = { index, newPlant, postPlant, editPlant, updatePlant, showPlant, deletePlant, addComment, isCreator };
+
+module.exports = { index, newPlant, postPlant, editPlant, updatePlant, showPlant, deletePlant, addComment, isCreator, editComment, showUserPlants };

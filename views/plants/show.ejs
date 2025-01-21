@@ -5,49 +5,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
   <%- include('../partials/head') %>
 </head>
 
 <body>
   <%- include('../partials/nav', { user: user }) %>
 
-  <div class="container" id="bottomMargin">
-    <div class="card">
-      <div class="card-content">
-        <header>
-          <h1 class="center-align green-text text-darken-2">
-            <%= plant.name %>
-          </h1>
-        </header>
-        <div class="row">
-          <div class="col s12 m4">
-            <img class="responsive-img z-depth-2" src="<%= plant.coverImage %>" alt="<%= plant.name %>"
-              style="max-height: 300px; border-radius: 10px;">
-          </div>
-          <div class="col s12 m8">
-            <div class="plant-details">
-              <p><strong>Propagation:</strong> <%= plant.propagation %></p>
-              <p><strong>Watering:</strong> <%= plant.watering %></p>
-              <p><strong>Lighting:</strong> <%= plant.lighting %></p>
-              <p><strong>Soil:</strong> <%= plant.soil %></p>
-              <p><strong>Care:</strong> <%= plant.care %></p>
+    <div class="container" id="bottomMargin">
+      <div class="card">
+        <div class="card-content">
+          <header>
+            <h1 class="center-align green-text text-darken-2">
+              <%= plant.name %>
+            </h1>
+          </header>
+          <div class="row">
+            <div class="col s12 m4">
+              <img class="responsive-img z-depth-2" src="<%= plant.coverImage %>" alt="<%= plant.name %>"
+                style="max-height: 300px; border-radius: 10px;">
+            </div>
+            <div class="col s12 m8">
+              <div class="plant-details">
+                <p><strong>Propagation:</strong>
+                  <%= plant.propagation %>
+                </p>
+                <p><strong>Watering:</strong>
+                  <%= plant.watering %>
+                </p>
+                <p><strong>Lighting:</strong>
+                  <%= plant.lighting %>
+                </p>
+                <p><strong>Soil:</strong>
+                  <%= plant.soil %>
+                </p>
+                <p><strong>Care:</strong>
+                  <%= plant.care %>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <h2>Comments</h2>
+      <form action="/plants/<%= plant._id %>/comments" method="POST">
+        <textarea name="content" placeholder="Write a comment..." required></textarea>
+        <button type="submit" class="btn waves-effect teal darken-4">Post Comment</button>
+      </form>
+      <ul>
+        <% plant.comments.forEach(comment=> { %>
+          <li>
+            <strong>
+              <%= comment.createdBy.username %>
+            </strong>: <%= comment.content %>
+          </li>
+          <% }) %>
+      </ul>
 
-    <div class="center-align" style="margin-top: 40px;">
-      <a href="/plants" class="btn waves-effect light-green lighten-2">Return to Plants Page</a>
-      <% if (plant.createdBy && plant.createdBy.equals(user._id)) { %>
-        <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect teal darken-4">Edit Plant</a>
-        <form action="/plants/<%= plant.id %>?_method=DELETE" method="POST" style="display: inline;">
-          <button class="btn red darken-1">Delete Plant</button>
-        </form>
-      <% } %>
+      <div class="center-align" style="margin-top: 40px;">
+        <a href="/plants" class="btn waves-effect light-green lighten-2">Return to Plants Page</a>
+        <% if (plant.createdBy && plant.createdBy.equals(user._id)) { %>
+          <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect teal darken-4">Edit Plant</a>
+          <form action="/plants/<%= plant.id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn red darken-1">Delete Plant</button>
+          </form>
+          <% } %>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Users</title>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/nav', { user: user }) %>
+
+  <div class="container">
+    <h1 class="center-align">All Users</h1>
+    <% if (users.length === 0) { %>
+      <p class="center-align">No users found.</p>
+    <% } else { %>
+      <ul class="collection">
+        <% users.forEach(user => { %>
+          <li class="collection-item">
+            <a href="/users/<%= user._id %>/plants"><%= user.username %></a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+
+</html>

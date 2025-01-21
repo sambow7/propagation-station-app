@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= user.username %>'s Plants</title>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/nav', { user: user }) %>
+
+  <div class="container">
+    <h1 class="center-align"><%= user.username %>'s Plants</h1>
+    <% if (plants.length === 0) { %>
+      <p class="center-align"><%= user.username %> has not added any plants yet.</p>
+    <% } else { %>
+      <ul class="plant-list">
+        <% plants.forEach(plant => { %>
+          <li class="card z-depth-2" style="margin: 20px; padding: 20px; border-radius: 10px;">
+            <div class="row">
+              <div class="col s3">
+                <img src="<%= plant.coverImage || 'https://via.placeholder.com/150' %>" alt="<%= plant.name %>" class="responsive-img" style="border-radius: 10px;">
+              </div>
+              <div class="col s9">
+                <h5><strong><%= plant.name %></strong></h5>
+                <p><em>Propagation: <%= plant.propagation %></em></p>
+                <p><strong>Date:</strong> <%= plant.createdAt.toDateString() %></p>
+              </div>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+
+</html>
