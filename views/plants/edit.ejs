@@ -70,6 +70,20 @@
           <button type="submit" class="btn red darken-1" onclick="return confirm('Are you sure you want to delete this plant?')">Delete Plant</button>
         </div>
       </form>
+      <% if (plant.createdBy._id.toString() === user.id) { %>
+        <div class="row center-align">
+          <a href="/plants/<%= plant._id %>/edit" class="btn waves-effect blue lighten-1">Edit Plant</a>
+          <form action="/plants/<%= plant._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit" class="btn red darken-1" onclick="return confirm('Are you sure you want to delete this plant?')">Delete Plant</button>
+          </form>
+        </div>
+      <% } %>
+      <% if (messages.success) { %>
+        <div class="alert alert-success"><%= messages.success %></div>
+      <% } %>
+      <% if (messages.error) { %>
+        <div class="alert alert-danger"><%= messages.error %></div>
+      <% } %>
     </div>
   </div>
 </body>

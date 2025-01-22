@@ -66,12 +66,12 @@
 
       <div class="center-align" style="margin-top: 40px;">
         <a href="/plants" class="btn waves-effect light-green lighten-2">Return to Plants Page</a>
-        <% if (plant.createdBy && plant.createdBy.equals(user._id)) { %>
-          <a href="/plants/<%= plant.id %>/edit" class="btn waves-effect teal darken-4">Edit Plant</a>
-          <form action="/plants/<%= plant.id %>?_method=DELETE" method="POST" style="display: inline;">
-            <button class="btn red darken-1">Delete Plant</button>
+        <% if (plant.createdBy && plant.createdBy.toString() === user.id) { %>
+          <a href="/plants/<%= plant._id %>/edit" class="btn waves-effect teal darken-4">Edit Plant</a>
+          <form action="/plants/<%= plant._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn red darken-1" onclick="return confirm('Are you sure you want to delete this plant?')">Delete Plant</button>
           </form>
-          <% } %>
+        <% } %>
       </div>
     </div>
 </body>

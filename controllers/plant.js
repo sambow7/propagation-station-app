@@ -151,18 +151,22 @@ async function showPlant(req, res) {
 async function editPlant(req, res) {
   try {
     const plant = await Plant.findById(req.params.id);
-    console.log(plant);
     if (!plant) {
       req.flash('error', 'Plant not found.');
       return res.status(404).redirect('/plants');
     }
-    //prevent from editing plant
+
+    // Allow only the creator to edit their plant
     if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to edit this plant.');
       return res.redirect('/plants');
     }
 
-    res.render('plants/edit', { title: 'Edit Plant', plant });
+    res.render('plants/edit', {
+      title: 'Edit Plant',
+      plant,
+      user: req.session.user, // Pass the session user for view logic
+    });
   } catch (error) {
     console.error('Error fetching plant for edit:', error);
     req.flash('error', 'An error occurred while fetching the plant.');
@@ -178,14 +182,16 @@ async function updatePlant(req, res) {
       return res.status(404).redirect('/plants');
     }
 
+    // Allow only the creator to update their plant
     if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to update this plant.');
       return res.redirect('/plants');
     }
 
+    // Update the plant with new data
     await Plant.findByIdAndUpdate(req.params.id, req.body, { new: true });
     req.flash('success', 'Plant updated successfully!');
-    res.status(200).redirect('/plants');
+    res.redirect(`/plants/${plant._id}`);
   } catch (error) {
     console.error('Error updating plant:', error);
     req.flash('error', 'An error occurred while updating the plant.');
@@ -195,24 +201,25 @@ async function updatePlant(req, res) {
 
 async function deletePlant(req, res) {
   try {
-    const { id } = req.params;
-    const userId = req.session.user.id;
+    const plant = await Plant.findById(req.params.id);
+    if (!plant) {
+      req.flash('error', 'Plant not found.');
+      return res.status(404).redirect('/plants');
+    }
 
-    const isAuthorized = await isCreator(id, userId);
-    if (!isAuthorized) {
+    // Allow only the creator to delete their plant
+    if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to delete this plant.');
-      return res.redirect(`/plants/${id}`);
+      return res.redirect('/plants');
     }
 
-    const deletedPlant = await Plant.findByIdAndDelete(id);
-    if (deletedPlant) {
-      res.status(200).redirect('/plants');
-    } else {
-      res.status(404).render('404/notfound', { title: 'Plant Not Found' });
-    }
+    await plant.deleteOne();
+    req.flash('success', 'Plant deleted successfully!');
+    res.redirect('/plants');
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
+    console.error('Error deleting plant:', error);
+    req.flash('error', 'An error occurred while deleting the plant.');
+    res.status(500).redirect('/plants');
   }
 }
 
