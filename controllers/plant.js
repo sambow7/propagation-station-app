@@ -137,7 +137,7 @@ async function showPlant(req, res) {
       res.render('plants/show', {
         title: 'Plant Details',
         plant,
-        user: req.session.user, // Pass the session user for view-specific logic
+        user: req.session.user, // Ensure the session user is passed here
       });
     } else {
       res.status(404).render('404/notfound', { title: 'Plant Not Found' });

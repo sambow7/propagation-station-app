@@ -30,10 +30,18 @@ app.use(session({
   cookie: { secure: process.env.NODE_ENV === 'Production', httpOnly: true }
 }));
 app.use(flash());
+
 app.use((req, res, next) => {
   res.locals.messages = req.flash();
   next();
 });
+
+app.use((req, res, next) => {
+  console.log('Request Content-Type:', req.headers['content-type']);
+  console.log('Request Body:', req.body);
+  next();
+});
+
 app.use((req, res, next) => {
   console.log('Request Content-Type:', req.headers['content-type']);
   console.log('Request Body:', req.body);
