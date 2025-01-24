@@ -69,14 +69,14 @@ async function postPlant(req, res) {
 
   try {
     const newPlant = new Plant({
-      name,
-      propagation,
-      watering,
-      lighting,
-      soil,
-      care,
-      coverImage,
-      createdBy: req.session.user.id, // Ensure the user is assigned
+      name: req.body.name,
+      propagation: req.body.propagation,
+      watering: req.body.watering,
+      lighting: req.body.lighting,
+      soil: req.body.soil,
+      care: req.body.care,
+      coverImage: req.body.coverImage,
+      createdBy: req.session.user.id, // Assign the logged-in user's ID
     });
     await newPlant.save();
     res.redirect('/plants');
@@ -146,6 +146,7 @@ async function showPlant(req, res) {
     console.error('Error fetching plant details:', error);
     res.status(500).send('Internal Server Error');
   }
+  console.log('Plant Data:', plant);
 }
 
 async function editPlant(req, res) {
@@ -156,17 +157,13 @@ async function editPlant(req, res) {
       return res.status(404).redirect('/plants');
     }
 
-    // Allow only the creator to edit their plant
+    // Ensure the user owns the plant
     if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to edit this plant.');
       return res.redirect('/plants');
     }
 
-    res.render('plants/edit', {
-      title: 'Edit Plant',
-      plant,
-      user: req.session.user, // Pass the session user for view logic
-    });
+    res.render('plants/edit', { title: 'Edit Plant', plant, user: req.session.user });
   } catch (error) {
     console.error('Error fetching plant for edit:', error);
     req.flash('error', 'An error occurred while fetching the plant.');
@@ -182,16 +179,14 @@ async function updatePlant(req, res) {
       return res.status(404).redirect('/plants');
     }
 
-    // Allow only the creator to update their plant
     if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to update this plant.');
       return res.redirect('/plants');
     }
 
-    // Update the plant with new data
     await Plant.findByIdAndUpdate(req.params.id, req.body, { new: true });
     req.flash('success', 'Plant updated successfully!');
-    res.redirect(`/plants/${plant._id}`);
+    res.redirect('/plants');
   } catch (error) {
     console.error('Error updating plant:', error);
     req.flash('error', 'An error occurred while updating the plant.');
@@ -207,7 +202,6 @@ async function deletePlant(req, res) {
       return res.status(404).redirect('/plants');
     }
 
-    // Allow only the creator to delete their plant
     if (plant.createdBy.toString() !== req.session.user.id) {
       req.flash('error', 'You are not authorized to delete this plant.');
       return res.redirect('/plants');
