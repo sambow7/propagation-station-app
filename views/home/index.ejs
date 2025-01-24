@@ -6,39 +6,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%- include('../partials/head') %>
-  <title>🪴 Plants 🪴</title>
+    <title>🪴 Plants 🪴</title>
 </head>
 
 <body>
   <%- include('../partials/nav', { user: user }) %>
-  <main class="container">
-    <% if (user) { %>
-      <div class="center-align" style="margin-top: 40px;">
-        <h4>Welcome back, <%= user.name %>!</h4>
-        <a href="/plants" class="btn waves-effect">Go to Plants Page</a>
-      </div>
-      <div class="center-align" style="margin-top: 40px;">
-        <h4><a href="/users">Users</a>Green Community</h4>
-        <a href="/plants" class="btn waves-effect">Go to Plants Page</a>
-      </div>
-      <div class="center-align" style="margin-top: 40px;">
-        <a href="/auth/sign-out" class="btn waves-effect">Sign out</a>
-      </div>
-    <% } else { %>
-      <div class="welcome-message">
-        <h4>Welcome to Propagation Station!</h4>
-        <p>Sign up or sign in to get started.</p>
-        <div>
-          <a href="/auth/sign-up" class="btn waves-effect">Sign up</a>
-          <a href="/auth/sign-in" class="btn waves-effect">Sign in</a>
+    <main class="container">
+      <% if (user) { %>
+        <div class="center-align" style="margin-top: 40px;">
+          <h4>Welcome back <%= user.username %>!</h4>
+          <a href="/plants" class="btn waves-effect">Go to Plants Page</a>
         </div>
-      </div>
-    <% } %>
-  </main>
+        <div class="center-align" style="margin-top: 40px;">
+          <a href="/users" class="btn waves-effect">Green Community</a>
+        </div>
+        <div class="center-align" style="margin-top: 40px;">
+          <a href="/auth/sign-out" class="btn waves-effect">Sign out</a>
+        </div>
+        <% } else { %>
+          <div class="welcome-message">
+            <h4>Welcome to Propagation Station!</h4>
+            <p>Sign up or sign in to get started.</p>
+            <div>
+              <a href="/auth/sign-up" class="btn waves-effect">Sign up</a>
+              <a href="/auth/sign-in" class="btn waves-effect">Sign in</a>
+            </div>
+          </div>
+          <% } %>
+    </main>
 </body>
 
 <footer>
   <%- include('../partials/foot')%>
 </footer>
-    
+
 </html>
