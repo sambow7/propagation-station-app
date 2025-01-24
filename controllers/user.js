@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const Plant = require('../models/plant');
 
-// List all users
 async function index(req, res) {
   try {
     const users = await User.find({}, 'username'); // Fetch usernames only
@@ -12,7 +11,6 @@ async function index(req, res) {
   }
 }
 
-// Show a specific user's plant list
 async function showUserPlants(req, res) {
   try {
     const { userId } = req.params;

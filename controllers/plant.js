@@ -15,10 +15,10 @@ async function isCreator(plantId, userId) {
 async function index(req, res) {
   try {
     if (!req.session.user) {
-      return res.redirect('/auth/sign-in'); // Redirect if user not logged in
+      return res.redirect('/auth/sign-in'); 
     }
 
-    const plants = await Plant.find({ createdBy: req.session.user.id }) // Fetch plants for the logged-in user
+    const plants = await Plant.find({ createdBy: req.session.user.id }) 
       .populate('createdBy', 'username')
       .populate('comments.createdBy', 'username');
 
