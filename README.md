@@ -2,9 +2,9 @@
 
  Propagation Station: A Community for Plant Enthusiasts
 
-#### Propagation Station is a web application designed to bring together plant lovers in a community where users can curate a personal list of plants, share their propagation updates, and interact with other users. The app fosters a collaborative environment for learning, sharing, and growing plants.
+## Propagation Station is a web application designed to bring together plant lovers in a community where users can curate a personal list of plants, share their propagation updates, and interact with other users. The app fosters a collaborative environment for learning, sharing, and growing plants.
 
-## Features
+### Features
 
 - Personal Plant Collection: Users can create and manage a personalized list of plants, complete with details like care instructions, watering schedules, and lighting preferences.
 
